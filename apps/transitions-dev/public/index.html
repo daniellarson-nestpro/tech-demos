@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transitions gallery — inspired by transitions.dev</title>
+  <link rel="stylesheet" href="/base.css" />
+  <link rel="stylesheet" href="/transitions.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>UI transitions gallery</h1>
+    <p>Ten copy-paste micro-transitions, inspired by <a href="https://transitions.dev" target="_blank" rel="noreferrer">transitions.dev</a>. Play each one live, then grab the CSS.</p>
+  </header>
+
+  <main class="grid">
+
+    <!-- 1. Toast -->
+    <article class="card" data-demo="toast">
+      <div class="stage">
+        <button class="ui-btn" data-action="toast">Show toast</button>
+        <div class="toast" id="toast" hidden>
+          <span class="toast-dot"></span>
+          <div>
+            <strong>Deploy complete</strong>
+            <small>app-prod-42 is live</small>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Toast open/close</h2>
+          <p>Rises in with fade, blur and scale</p>
+        </div>
+        <button class="copy-btn" data-copy="toast">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 2. Tabs sliding pill -->
+    <article class="card" data-demo="tabs">
+      <div class="stage">
+        <div class="tabs" data-active="0" id="tabs">
+          <span class="tabs-pill"></span>
+          <button class="tab is-active">Overview</button>
+          <button class="tab">Activity</button>
+          <button class="tab">Settings</button>
+        </div>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Tabs sliding</h2>
+          <p>Pill indicator follows the active tab</p>
+        </div>
+        <button class="copy-btn" data-copy="tabs">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 3. Skeleton reveal -->
+    <article class="card" data-demo="skeleton">
+      <div class="stage">
+        <div class="profile" id="skeleton">
+          <div class="profile-skeleton">
+            <span class="sk sk-avatar"></span>
+            <span class="sk sk-line w60"></span>
+            <span class="sk sk-line w80"></span>
+          </div>
+          <div class="profile-content">
+            <span class="avatar">JC</span>
+            <strong>Jane Cooper</strong>
+            <small>jane@example.com</small>
+          </div>
+        </div>
+        <button class="ui-btn ghost" data-action="skeleton">Load</button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Skeleton loader and reveal</h2>
+          <p>Pulse to content cross-fade</p>
+        </div>
+        <button class="copy-btn" data-copy="skeleton">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 4. Number flip -->
+    <article class="card" data-demo="number-flip">
+      <div class="stage">
+        <div class="numflip" id="numflip" aria-live="polite"></div>
+        <button class="ui-btn ghost" data-action="number-flip">Randomize</button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Number flip</h2>
+          <p>Digit flip with blur and stagger</p>
+        </div>
+        <button class="copy-btn" data-copy="number-flip">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 5. Error shake -->
+    <article class="card" data-demo="error-shake">
+      <div class="stage">
+        <form class="email-form" id="email-form" novalidate>
+          <input class="email-input" type="email" placeholder="you@company.com" />
+          <button class="ui-btn" type="submit">Sign up</button>
+        </form>
+        <small class="error-msg" hidden>Please enter a valid email.</small>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Error state shake</h2>
+          <p>Cubic-bezier shake on invalid input</p>
+        </div>
+        <button class="copy-btn" data-copy="error-shake">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 6. Success check -->
+    <article class="card" data-demo="success-check">
+      <div class="stage">
+        <div class="check-badge" id="check-badge">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path class="check-path" d="M6 12.5l4 4L18 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <button class="ui-btn ghost" data-action="success-check">Replay</button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Success check</h2>
+          <p>Check draws on with blur and rotate</p>
+        </div>
+        <button class="copy-btn" data-copy="success-check">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 7. Spinner to check morph -->
+    <article class="card" data-demo="spinner-check">
+      <div class="stage">
+        <button class="morph-btn" id="morph-btn">
+          <span class="morph-label">Save changes</span>
+          <span class="morph-spinner"></span>
+          <svg class="morph-check" viewBox="0 0 24 24" fill="none">
+            <path d="M6 12.5l4 4L18 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Spinner to check morph</h2>
+          <p>Spinner pops into a drawn check</p>
+        </div>
+        <button class="copy-btn" data-copy="spinner-check">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 8. Like button -->
+    <article class="card" data-demo="like">
+      <div class="stage">
+        <button class="like-btn" id="like-btn" aria-label="Like">
+          <span class="like-particles">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21s-7.5-4.9-9.8-9.2C.8 8.9 2.4 5 6 5c2.2 0 3.5 1.2 6 3.8C14.5 6.2 15.8 5 18 5c3.6 0 5.2 3.9 3.8 6.8C19.5 16.1 12 21 12 21z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Like button</h2>
+          <p>Heart fills and bursts particles</p>
+        </div>
+        <button class="copy-btn" data-copy="like">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 9. Notification badge -->
+    <article class="card" data-demo="badge">
+      <div class="stage">
+        <div class="bell-wrap">
+          <svg class="bell" viewBox="0 0 24 24" fill="none">
+            <path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8M13.7 20a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="badge" id="badge" hidden>1</span>
+        </div>
+        <button class="ui-btn ghost" data-action="badge">Notify</button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Notification badge</h2>
+          <p>Diagonal slide with spring pop-in</p>
+        </div>
+        <button class="copy-btn" data-copy="badge">Copy CSS</button>
+      </div>
+    </article>
+
+    <!-- 10. Shimmer text -->
+    <article class="card" data-demo="shimmer">
+      <div class="stage">
+        <span class="shimmer-text">Generating response…</span>
+      </div>
+      <div class="meta">
+        <div>
+          <h2>Shimmer text</h2>
+          <p>Masked gradient sweep across text</p>
+        </div>
+        <button class="copy-btn" data-copy="shimmer">Copy CSS</button>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with Bun · zero dependencies · every demo is plain CSS with a tiny JS trigger</p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

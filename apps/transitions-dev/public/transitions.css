@@ -1,0 +1,475 @@
+/*
+ * The 10 transitions. Each section between "=== name ===" and "=== end ==="
+ * is what the Copy CSS button copies — keep sections self-contained.
+ */
+
+/* === toast === */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #1a1d23;
+  border: 1px solid #2c313a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+}
+
+.toast strong { display: block; font-size: 13.5px; }
+.toast small { color: #8a919e; font-size: 12px; }
+
+.toast-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, .7);
+}
+
+.toast.open {
+  animation: toast-in .5s cubic-bezier(.22, 1.2, .36, 1) both;
+}
+
+.toast.closing {
+  animation: toast-out .3s ease-in both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(.92);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(.95);
+    filter: blur(4px);
+  }
+}
+/* === end === */
+
+/* === tabs === */
+.tabs {
+  position: relative;
+  display: flex;
+  padding: 4px;
+  border-radius: 12px;
+  background: #1a1d23;
+  border: 1px solid #2c313a;
+}
+
+.tab {
+  position: relative;
+  z-index: 1;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 18px;
+  width: 96px;
+  border: none;
+  background: none;
+  color: #8a919e;
+  cursor: pointer;
+  transition: color .25s;
+}
+
+.tab.is-active { color: #e8eaee; }
+
+.tabs-pill {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 96px;
+  height: calc(100% - 8px);
+  border-radius: 9px;
+  background: #2c313a;
+  transition: transform .45s cubic-bezier(.3, 1.35, .4, 1);
+}
+
+.tabs[data-active="1"] .tabs-pill { transform: translateX(96px); }
+.tabs[data-active="2"] .tabs-pill { transform: translateX(192px); }
+/* === end === */
+
+/* === skeleton === */
+.profile {
+  position: relative;
+  width: 220px;
+  height: 96px;
+}
+
+.profile-skeleton,
+.profile-content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: 12px;
+  row-gap: 6px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #1a1d23;
+  border: 1px solid #2c313a;
+}
+
+.sk {
+  border-radius: 6px;
+  background: #2c313a;
+  animation: sk-pulse 1.3s ease-in-out infinite;
+}
+
+.sk-avatar { grid-row: 1 / 3; width: 40px; height: 40px; border-radius: 50%; }
+.sk-line { height: 12px; }
+.sk-line.w60 { width: 60%; }
+.sk-line.w80 { width: 80%; }
+
+@keyframes sk-pulse {
+  50% { opacity: .45; }
+}
+
+.avatar {
+  grid-row: 1 / 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #7c8cff;
+  color: #0b0c0f;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-content strong { font-size: 13.5px; align-self: end; }
+.profile-content small { color: #8a919e; font-size: 12px; }
+
+/* cross-fade: skeleton out, content in */
+.profile-content {
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(4px);
+}
+
+.profile.loaded .profile-skeleton {
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.profile.loaded .profile-content {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: opacity .45s ease .12s, transform .45s cubic-bezier(.22, 1, .36, 1) .12s, filter .45s ease .12s;
+}
+/* === end === */
+
+/* === number-flip === */
+.numflip {
+  display: flex;
+  font-size: 40px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+  perspective: 400px;
+}
+
+.numflip .digit {
+  display: inline-block;
+  animation: digit-flip .5s cubic-bezier(.22, 1, .36, 1) both;
+  animation-delay: calc(var(--d) * 60ms);
+  transform-origin: 50% 60%;
+}
+
+@keyframes digit-flip {
+  from {
+    opacity: 0;
+    transform: rotateX(90deg) translateY(8px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+    filter: blur(0);
+  }
+}
+/* === end === */
+
+/* === error-shake === */
+.email-input {
+  font: inherit;
+  font-size: 13.5px;
+  padding: 9px 14px;
+  width: 190px;
+  border-radius: 10px;
+  border: 1px solid #2c313a;
+  background: #1a1d23;
+  color: #e8eaee;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.email-input:focus { border-color: #4a5160; }
+
+.email-input.invalid {
+  border-color: #f87171;
+  animation: shake .4s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+/* === end === */
+
+/* === success-check === */
+.check-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, .12);
+  border: 1.5px solid rgba(74, 222, 128, .5);
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-badge svg { width: 34px; height: 34px; }
+
+.check-badge.play {
+  animation: badge-pop-in .55s cubic-bezier(.26, 1.35, .42, 1) both;
+}
+
+.check-badge.play .check-path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: check-draw .45s ease-out .2s forwards;
+}
+
+@keyframes badge-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(.4) rotate(-24deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes check-draw {
+  to { stroke-dashoffset: 0; }
+}
+/* === end === */
+
+/* === spinner-check === */
+.morph-btn {
+  position: relative;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 10px 20px;
+  min-width: 150px;
+  border-radius: 10px;
+  border: none;
+  background: #7c8cff;
+  color: #0b0c0f;
+  cursor: pointer;
+  transition: background .25s;
+}
+
+.morph-btn .morph-label { transition: opacity .2s; }
+
+.morph-btn .morph-spinner,
+.morph-btn .morph-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+}
+
+.morph-btn .morph-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(11, 12, 15, .25);
+  border-top-color: #0b0c0f;
+  animation: spin .7s linear infinite;
+}
+
+.morph-btn .morph-check { width: 18px; height: 18px; color: #0b0c0f; }
+
+.morph-btn.loading .morph-label,
+.morph-btn.done .morph-label { opacity: 0; }
+
+.morph-btn.loading .morph-spinner { opacity: 1; }
+
+.morph-btn.done { background: #4ade80; }
+
+.morph-btn.done .morph-check {
+  opacity: 1;
+  animation: check-pop .45s cubic-bezier(.26, 1.4, .42, 1) both;
+}
+
+.morph-btn.done .morph-check path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: check-draw-morph .35s ease-out .1s forwards;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes check-pop {
+  from { scale: .3; filter: blur(3px); }
+  to { scale: 1; filter: blur(0); }
+}
+
+@keyframes check-draw-morph {
+  to { stroke-dashoffset: 0; }
+}
+/* === end === */
+
+/* === like === */
+.like-btn {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #2c313a;
+  background: #1a1d23;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: #8a919e;
+  stroke-width: 1.8;
+  transition: stroke .2s, fill .2s;
+}
+
+.like-btn.liked svg {
+  fill: #fb7185;
+  stroke: #fb7185;
+  animation: heart-bounce .5s cubic-bezier(.26, 1.6, .42, 1);
+}
+
+@keyframes heart-bounce {
+  0% { scale: .6; }
+  50% { scale: 1.25; }
+  100% { scale: 1; }
+}
+
+.like-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.like-particles i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fb7185;
+  opacity: 0;
+}
+
+.like-btn.liked .like-particles i {
+  animation: particle .6s ease-out both;
+}
+
+.like-particles i:nth-child(1) { --px: -26px; --py: -20px; }
+.like-particles i:nth-child(2) { --px: 26px;  --py: -20px; }
+.like-particles i:nth-child(3) { --px: -32px; --py: 6px; }
+.like-particles i:nth-child(4) { --px: 32px;  --py: 6px; }
+.like-particles i:nth-child(5) { --px: -12px; --py: -32px; }
+.like-particles i:nth-child(6) { --px: 12px;  --py: -32px; }
+
+@keyframes particle {
+  0% { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--px)), calc(-50% + var(--py))) scale(.4); }
+}
+/* === end === */
+
+/* === badge === */
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #fb7185;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge.pop {
+  animation: badge-pop .5s cubic-bezier(.3, 1.6, .4, 1) both;
+}
+
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: translate(-8px, 8px) scale(0);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+/* === end === */
+
+/* === shimmer === */
+.shimmer-text {
+  font-size: 20px;
+  font-weight: 550;
+  color: transparent;
+  background: linear-gradient(
+    100deg,
+    #565d6a 40%,
+    #f2f4f8 50%,
+    #565d6a 60%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shimmer 2.2s linear infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 130% 0; }
+  to { background-position: -70% 0; }
+}
+/* === end === */

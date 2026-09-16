@@ -1,0 +1,138 @@
+/* Page shell + gallery chrome. The copyable transition CSS lives in transitions.css. */
+
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0b0c0f;
+  --card: #131519;
+  --stage: #0e1013;
+  --border: #23262d;
+  --text: #e8eaee;
+  --muted: #8a919e;
+  --accent: #7c8cff;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 24px 8px;
+}
+
+.site-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+
+.site-header p { margin: 0; color: var(--muted); font-size: 15px; }
+.site-header a { color: var(--accent); text-decoration: none; }
+.site-header a:hover { text-decoration: underline; }
+
+.grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage {
+  background: var(--stage);
+  border-bottom: 1px solid var(--border);
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.meta h2 { margin: 0 0 2px; font-size: 15px; font-weight: 600; }
+.meta p { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+.copy-btn {
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background .15s;
+}
+
+.copy-btn:hover { color: var(--text); border-color: #3a3f49; }
+
+.copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, .4);
+  background: rgba(74, 222, 128, .08);
+}
+
+/* generic demo trigger buttons */
+.ui-btn {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #0b0c0f;
+  cursor: pointer;
+}
+
+.ui-btn.ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.ui-btn.ghost:hover { color: var(--text); }
+
+.site-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* small helpers used inside stages */
+.email-form { display: flex; gap: 8px; }
+
+.error-msg { color: #f87171; font-size: 12.5px; }
+
+.bell-wrap { position: relative; width: 44px; height: 44px; color: var(--muted); }
+.bell { width: 44px; height: 44px; }

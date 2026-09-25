@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LiveAvatar GPT-Live</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ===================== Avatar stage ===================== -->
+    <section class="stage">
+      <header class="stage-top">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          LiveAvatar <em>GPT-Live</em>
+        </div>
+        <div class="session-hud">
+          <span class="hud-chip" id="hud-mode">demo</span>
+          <span class="hud-chip" id="hud-latency">— ms</span>
+          <span class="hud-chip" id="hud-fps">60 fps</span>
+          <span class="hud-chip live-badge" id="hud-live"><i></i> OFFLINE</span>
+        </div>
+      </header>
+
+      <div class="avatar-frame" id="avatar-frame">
+        <svg id="avatar" viewBox="0 0 240 240" aria-label="Nova avatar">
+          <defs>
+            <radialGradient id="g-bg" cx="50%" cy="35%" r="80%">
+              <stop offset="0%" stop-color="#2c2f55"/>
+              <stop offset="100%" stop-color="#14152b"/>
+            </radialGradient>
+            <linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffd9c2"/>
+              <stop offset="100%" stop-color="#f2b494"/>
+            </linearGradient>
+            <linearGradient id="g-hair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6c5ce7"/>
+              <stop offset="100%" stop-color="#a55eea"/>
+            </linearGradient>
+            <linearGradient id="g-shirt" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#38b6ff"/>
+              <stop offset="100%" stop-color="#6c5ce7"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="240" height="240" rx="24" fill="url(#g-bg)"/>
+
+          <!-- shoulders -->
+          <path d="M50 240 Q54 178 120 176 Q186 178 190 240 Z" fill="url(#g-shirt)"/>
+          <!-- neck -->
+          <rect x="106" y="148" width="28" height="34" rx="12" fill="#eaa77f"/>
+
+          <!-- head -->
+          <g id="head">
+            <ellipse cx="120" cy="104" rx="52" ry="58" fill="url(#g-skin)"/>
+            <!-- hair -->
+            <path d="M68 96 Q64 34 120 34 Q176 34 172 96 Q172 62 150 56 Q160 74 142 66 Q118 56 98 64 Q80 72 78 96 Z"
+                  fill="url(#g-hair)"/>
+            <!-- ears -->
+            <ellipse cx="66" cy="106" rx="8" ry="12" fill="#f2b494"/>
+            <ellipse cx="174" cy="106" rx="8" ry="12" fill="#f2b494"/>
+            <!-- brows -->
+            <path id="brow-l" d="M84 84 Q96 78 106 84" stroke="#5b4a8a" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path id="brow-r" d="M134 84 Q144 78 156 84" stroke="#5b4a8a" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <!-- eyes -->
+            <g id="eye-l">
+              <ellipse cx="96" cy="100" rx="9" ry="10" fill="#fff"/>
+              <circle class="pupil" cx="97" cy="102" r="4.5" fill="#33304e"/>
+            </g>
+            <g id="eye-r">
+              <ellipse cx="144" cy="100" rx="9" ry="10" fill="#fff"/>
+              <circle class="pupil" cx="145" cy="102" r="4.5" fill="#33304e"/>
+            </g>
+            <g id="lids">
+              <rect id="lid-l" x="85" y="88" width="22" height="0" rx="4" fill="url(#g-skin)"/>
+              <rect id="lid-r" x="133" y="88" width="22" height="0" rx="4" fill="url(#g-skin)"/>
+            </g>
+            <!-- nose -->
+            <path d="M118 108 Q115 120 121 122" stroke="#e09a72" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <!-- blush -->
+            <ellipse cx="88" cy="122" rx="8" ry="4.5" fill="#ff9e9e" opacity=".35"/>
+            <ellipse cx="152" cy="122" rx="8" ry="4.5" fill="#ff9e9e" opacity=".35"/>
+            <!-- mouth: ry animated by JS while speaking -->
+            <ellipse id="mouth" cx="120" cy="138" rx="14" ry="2.5" fill="#8c3b4a"/>
+            <ellipse id="tongue" cx="120" cy="141" rx="7" ry="0" fill="#d96a76"/>
+          </g>
+        </svg>
+
+        <div class="frame-overlay">
+          <div class="viz" id="viz" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span>
+          </div>
+          <div class="caption" id="caption"></div>
+        </div>
+
+        <div class="connect-veil" id="connect-veil">
+          <div class="veil-card">
+            <h2>Nova · LiveAvatar persona</h2>
+            <p>Simulated HeyGen LiveAvatar session — streamed tokens drive real-time lip sync.</p>
+            <button id="btn-connect">Start session</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="stage-bottom">
+        <span class="pill" id="pill-state">idle</span>
+        <span class="stage-note" id="stage-note">HyperFrames pipeline: simulated</span>
+      </footer>
+    </section>
+
+    <!-- ===================== Chat panel ===================== -->
+    <section class="chat">
+      <header class="chat-head">
+        <div>
+          <h1>Chat with Nova</h1>
+          <p id="chat-sub">single-user session · streaming transcript</p>
+        </div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="msg system">
+          Session transcript will appear here. Press <b>Start session</b>, then say hi —
+          try “how do you work?” or “what are HyperFrames?”
+        </div>
+      </div>
+
+      <form class="composer" id="composer">
+        <input id="input" type="text" autocomplete="off"
+               placeholder="Message Nova…" disabled />
+        <button id="btn-send" type="submit" disabled>
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

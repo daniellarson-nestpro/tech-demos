@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>claude-obsidian — self-organizing second brain</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">🧠</span>
+      <div>
+        <h1>claude-obsidian</h1>
+        <p>self-organizing AI second brain · LLM Wiki pattern</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span id="mode-badge" class="badge">…</span>
+      <button id="reset-btn" class="ghost">Reset vault</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Inbox / agent -->
+    <section class="pane inbox-pane">
+      <h2>📥 Inbox</h2>
+      <div id="drop-zone">
+        <textarea id="source-text" placeholder="Paste a source here — an article excerpt, a note, anything — or drop a .md / .txt file…"></textarea>
+        <div class="drop-hint">drop file to ingest</div>
+      </div>
+      <input id="source-title" type="text" placeholder="Source title (optional)" />
+      <div class="samples">
+        <span class="samples-label">or try a sample:</span>
+        <div id="sample-chips"></div>
+      </div>
+      <button id="run-btn" class="primary">▶ Run agent</button>
+
+      <div class="agent-log-wrap">
+        <h2>🤖 Agent activity</h2>
+        <div id="agent-log"><p class="log-empty">The agent is idle. Drop a source and run it.</p></div>
+      </div>
+    </section>
+
+    <!-- Vault tree -->
+    <section class="pane tree-pane">
+      <h2>🗂 Vault</h2>
+      <div id="vault-tree"></div>
+    </section>
+
+    <!-- Note viewer -->
+    <section class="pane note-pane">
+      <h2 id="note-title-bar">📄 <span id="note-path">Select a note</span></h2>
+      <article id="note-view"><p class="log-empty">Open a note from the vault tree, or run the agent on a source.</p></article>
+    </section>
+
+    <!-- Graph -->
+    <section class="pane graph-pane">
+      <h2>🕸 Graph</h2>
+      <svg id="graph"></svg>
+      <div class="legend">
+        <span><i class="dot seed"></i>seed note</span>
+        <span><i class="dot concept"></i>new concept</span>
+        <span><i class="dot source"></i>source</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

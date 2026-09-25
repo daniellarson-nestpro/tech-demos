@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inspo Moodboard — design inspiration playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wordmark">Inspo<span class="wordmark-dot">.</span> <span class="wordmark-sub">moodboard</span></div>
+    <div class="mode-badge" title="Offline demo — curated sample dataset, no live API">
+      <span class="mode-dot"></span> Sample data · offline demo
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Lend your agent<br /><em>some taste.</em></h1>
+      <p class="hero-sub">
+        A tiny playground for the Inspo MCP <code>recommend</code> flow — type a design brief
+        and pull exemplar screens, palettes, and type pairings from a curated sample archive.
+      </p>
+
+      <form id="brief-form" class="brief-form">
+        <input
+          id="brief-input"
+          type="text"
+          placeholder="Describe the vibe… e.g. calm fintech dashboard"
+          autocomplete="off"
+          autofocus
+        />
+        <button type="submit">Recommend</button>
+      </form>
+
+      <div class="chips" id="chips">
+        <button class="chip" data-brief="calm fintech dashboard">calm fintech dashboard</button>
+        <button class="chip" data-brief="dark developer tool landing page">dark dev tool landing</button>
+        <button class="chip" data-brief="playful consumer app">playful consumer app</button>
+        <button class="chip" data-brief="elegant editorial magazine">elegant editorial</button>
+        <button class="chip" data-brief="brutalist creator shop">brutalist creator shop</button>
+      </div>
+    </section>
+
+    <section class="results-head" id="results-head" hidden>
+      <h2 id="results-title"></h2>
+      <span class="results-meta" id="results-meta"></span>
+    </section>
+
+    <section class="board" id="board" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    Inspired by <a href="https://inspomcp.dev" target="_blank" rel="noreferrer">Inspo MCP</a> by Nutlope —
+    real websites for your coding agent to learn design from. This demo runs on a small
+    curated sample dataset; palettes and fonts are illustrative.
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

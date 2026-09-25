@@ -11,6 +11,54 @@
       "title": "freeLLM — free model/API directory",
       "url": "https://x.com/0x_kaize/status/2098474861257498863",
       "date": "2026-09-11"
+    },
+    {
+      "id": "2090544409213272277",
+      "title": "transitions.dev — UI transitions for AI agents",
+      "url": "https://x.com/ImranUxi/status/2090544409213272277",
+      "date": "2026-09-15"
+    },
+    {
+      "id": "2099837681559601508",
+      "title": "claude-obsidian — self-organizing Obsidian + Claude Code",
+      "url": "https://x.com/tom_doerr/status/2099837681559601508",
+      "date": "2026-09-15",
+      "repo": "https://github.com/AgriciDaniel/claude-obsidian"
+    },
+    {
+      "id": "2099547343112564921",
+      "title": "Inspo MCP — design inspiration MCP for coding agents (Nutlope)",
+      "url": "https://x.com/nutlope/status/2099547343112564921",
+      "date": "2026-09-16",
+      "repo": "https://github.com/Nutlope/inspo"
+    },
+    {
+      "id": "2099499437068357915",
+      "title": "ECC — Everything Claude Code / agent harness OS (skills, instincts, memory)",
+      "url": "https://x.com/polydao/status/2099499437068357915",
+      "date": "2026-09-17",
+      "repo": "https://github.com/affaan-m/ECC"
+    },
+    {
+      "id": "2100163133062975610",
+      "title": "claude-reflect — self-learning memory + skill discovery for Claude Code",
+      "url": "https://x.com/tom_doerr/status/2100163133062975610",
+      "date": "2026-09-18",
+      "repo": "https://github.com/BayramAnnakov/claude-reflect"
+    },
+    {
+      "id": "2100895118505222631",
+      "title": "LobeHub — Chief Agent Operator (hire, schedule, report on AI team)",
+      "url": "https://x.com/GithubProjects/status/2100895118505222631",
+      "date": "2026-09-24",
+      "repo": "https://github.com/lobehub/lobehub"
+    },
+    {
+      "id": "2090388154654265765",
+      "title": "Kokoro Web / kokoro-js — free local browser TTS (82M, Transformers.js)",
+      "url": "https://x.com/simplifyinAI/status/2090388154654265765",
+      "date": "2026-09-25",
+      "repo": "https://github.com/hexgrad/kokoro"
     }
   ]
 }

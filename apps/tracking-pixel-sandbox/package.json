@@ -1,0 +1,18 @@
+{
+  "name": "tracking-pixel-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hermetic sandbox for detonating email tracking pixels: intercepts, decodes and attributes every beacon without letting one reach the network.",
+  "scripts": {
+    "dev": "bun --watch src/server.ts",
+    "start": "bun src/server.ts",
+    "test": "bun test",
+    "probe": "bun scripts/evasion-probe.mjs",
+    "capture": "bun scripts/capture.mjs"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.2",
+    "playwright": "~1.63.0"
+  }
+}

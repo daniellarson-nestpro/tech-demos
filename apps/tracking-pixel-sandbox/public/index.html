@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracking Pixel Sandbox</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='3' fill='%230b0e13'/><circle cx='8' cy='8' r='3' fill='%235eead4'/></svg>">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>Tracking Pixel Sandbox</h1>
+    <span>detonate email beacons without letting one out</span>
+  </div>
+  <div class="spacer"></div>
+  <span class="shield" title="No route in this process forwards a request upstream.">egress blocked</span>
+  <span class="session-tag" id="session-tag">no session</span>
+</header>
+
+<div class="stats" id="stats">
+  <div class="stat"><div class="n" id="s-total">0</div><div class="l">beacons found</div></div>
+  <div class="stat"><div class="n" id="s-fired">0</div><div class="l">fired &amp; blocked</div></div>
+  <div class="stat"><div class="n" id="s-pixels">0</div><div class="l">invisible pixels</div></div>
+  <div class="stat"><div class="n" id="s-hosts">0</div><div class="l">distinct hosts</div></div>
+  <div class="stat" id="stat-leaks"><div class="n" id="s-leaks">0</div><div class="l">identity leaks</div></div>
+</div>
+
+<main>
+  <section class="col left">
+    <div class="col-head">Payload</div>
+    <div class="col-body">
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tab-sample"  aria-selected="true"  aria-controls="pane-sample">Samples</button>
+        <button class="tab" role="tab" id="tab-html"    aria-selected="false" aria-controls="pane-html">Paste HTML</button>
+        <button class="tab" role="tab" id="tab-url"     aria-selected="false" aria-controls="pane-url">Pixel URL</button>
+      </div>
+
+      <div class="pane" id="pane-sample" role="tabpanel">
+        <div class="samples" id="samples"></div>
+      </div>
+
+      <div class="pane" id="pane-html" role="tabpanel" hidden>
+        <textarea id="html-input" spellcheck="false" placeholder="Paste email HTML — a newsletter source, a saved message body, a suspicious snippet."></textarea>
+        <p class="hint">Scripts, <code>meta refresh</code>, inline event handlers and <code>&lt;base&gt;</code> are removed. Every remote URL is rerouted to the local collector before the markup is rendered.</p>
+      </div>
+
+      <div class="pane" id="pane-url" role="tabpanel" hidden>
+        <input type="url" id="url-input" spellcheck="false" placeholder="https://ct.sendgrid.net/wf/open?upn=...">
+        <p class="hint">One suspect URL, wrapped in a minimal payload. Nothing is requested from the host — the URL is parsed and decoded locally.</p>
+      </div>
+
+      <div class="pane" style="border-top:none;background:transparent;padding-top:12px">
+        <div class="actions">
+          <button class="go" id="detonate">Detonate</button>
+          <button class="ghost" id="refire" disabled title="Reload the sealed payload so every beacon fires again">Re-fire</button>
+        </div>
+        <p class="err" id="error" hidden></p>
+      </div>
+
+      <div class="preview-wrap">
+        <div class="preview-frame">
+          <div class="seal-bar">
+            <span class="pill">SEALED</span>
+            <span id="seal-detail">no payload loaded</span>
+          </div>
+          <div class="stage-empty" id="stage-empty">
+            Pick a sample and hit <b style="color:var(--accent)">Detonate</b>.<br>
+            The payload renders here with every beacon rerouted to a local trap.
+          </div>
+          <iframe id="stage" title="Sealed payload preview" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe>
+        </div>
+        <details class="strips" id="strips-box" hidden>
+          <summary id="strips-summary">Active content removed</summary>
+          <ul class="strip-list" id="strips"></ul>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="col">
+    <div class="col-head">
+      Beacon log
+      <label class="filter"><input type="checkbox" id="only-leaks"> only beacons carrying identity</label>
+    </div>
+    <div class="col-body">
+      <ul class="log" id="log"></ul>
+      <div class="empty" id="log-empty">
+        Nothing intercepted yet.<br>Beacons appear the instant the payload is parsed, then flip to
+        <b style="color:var(--shield)">blocked</b> as the sealed render tries to fetch them.
+      </div>
+    </div>
+    <div class="detail" id="detail" hidden>
+      <div class="detail-head">
+        <b id="detail-title">Beacon</b>
+        <button id="detail-close" aria-label="Close detail">&times;</button>
+      </div>
+      <div class="detail-body" id="detail-body"></div>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
